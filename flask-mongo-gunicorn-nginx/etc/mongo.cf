@@ -1,0 +1,7 @@
+
+
+MONGODB_SETTINGS = {
+    'db': 'MYAPP',
+    'host': 'mongoserver'
+}
+

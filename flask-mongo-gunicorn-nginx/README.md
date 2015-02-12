@@ -15,7 +15,7 @@ First install the YUM components
 
 Now upgrade the essential Python packages
 
-    pip install -U pandas futures greenlet eventlet trollius Flask WTForms flask-mongoengine gunicorn flask-cors
+    pip install -U futures greenlet eventlet trollius Flask WTForms flask-mongoengine gunicorn flask-cors
 
 Now clone the git repo
 

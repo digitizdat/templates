@@ -1,0 +1,57 @@
+#!/usr/bin/env ksh93
+#
+# <<program name>>
+#
+# <<program description>>
+#
+# Mth. DD, YYYY - Martin McGreal
+#
+# $Source$
+# $Id$
+
+# Environment variables
+PATH=/bin:/usr/bin:/sbin:/usr/sbin:$PATH
+
+
+# Global variables
+typeset self=${0##*/}
+
+
+# Functions
+
+function usage
+{
+    print -u2 "usage: $self [-hn] [-t tolerance (in KB)] host ..."
+    print -u2 "\t-h Help. Print this usage message, and exit w/code 0."
+    print -u2 "\t-n Don't print the column header."
+    print -u2 "\t-t tolerance[%] - KB or percentage tolerance."
+}
+
+
+# Main starts here
+
+typeset -A stdsizes
+typeset -A cursizes
+typeset kbtol=0  # Tolerance for size difference in KB
+typeset header=1 # Print column header
+typeset host fs logvol mntpt lv vg size used avail cap
+
+while getopts ":hnt:" opt; do
+    case $opt in
+        t) kbtol=$OPTARG;;
+        n) header=0;;
+        h) usage; exit 0;;
+        \?) print -- "-$OPTARG is not a valid option."
+            usage; exit 1;;
+    esac
+done
+
+shift $(expr $OPTIND - 1)
+set -A hlist $*
+
+if [[ ! "$hlist" ]]; then
+    usage
+    exit 1
+fi
+
+

@@ -24,6 +24,10 @@ $(BUILD_PKG):
 	cd $(BUILD_TEMP) && pip3 install -qt . -r requirements.txt && \
 	  zip -qr ../$(BUILD_PKG) .
 
+format:
+	find . -name "*.py" |xargs black -l 79
+	isort .
+
 clean:
 	@echo "\n~~~ $(BOLD)$(CYAN)Cleaning up$(NORMAL) ~~~"
 	rm -rf $(BUILD_TEMP) $(BUILD_PKG)
